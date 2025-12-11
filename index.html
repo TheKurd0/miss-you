@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom right, #ffe6ef, #ffdceb);
+            background: radial-gradient(circle at top, #ffd0e8, #ffb4da, #ffa3d1);
             font-family: "Arial", sans-serif;
             display: flex;
             justify-content: center;
@@ -17,99 +17,226 @@
             min-height: 100vh;
             text-align: center;
             overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 650px;
-            background: white;
-            padding: 25px;
-            margin: 20px;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            animation: fadeIn 1.3s ease;
+            overflow-y: hidden;
             position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* STAR BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://i.imgur.com/Q5jR0Cc.png');
+            opacity: 0.25;
+            animation: starsMove 40s linear infinite;
+            z-index: 1;
         }
 
+        @keyframes starsMove {
+            from { transform: translateY(0); }
+            to { transform: translateY(-300px); }
+        }
+
+        /* HEARTBEAT GLOW */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,90,140,0.25), transparent 70%);
+            animation: heartbeat 4s infinite ease-in-out;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+
+        /* MAIN BOX */
+        .container {
+            width: 90%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 12px 50px rgba(255, 100, 150, 0.4);
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 1.4s ease;
+            backdrop-filter: blur(8px);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* TITLE */
         .title {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: bold;
             color: #c1255a;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(255, 150, 180, 0.5);
+            text-shadow: 0 0 20px rgba(255, 120, 160, 0.8);
+            animation: titlePulse 3s infinite ease-in-out;
+        }
+
+        @keyframes titlePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
         }
 
         .message {
-            font-size: 1.25rem;
-            color: #444;
+            font-size: 1.15rem;
+            color: #5a3c4a;
             line-height: 1.7;
             margin-bottom: 30px;
         }
 
-        /* floating heart decorations */
+        /* FLOATING HEARTS */
         .heart {
             position: absolute;
-            font-size: 1.5rem;
-            color: #ff6b96;
-            opacity: 0.7;
-            animation: floatUp 6s infinite ease-in-out;
+            font-size: 1.6rem;
+            color: #ff759d;
+            opacity: 0.9;
+            animation: floatUp 7s infinite ease-in-out;
+            filter: drop-shadow(0 0 6px rgba(255, 120, 160, 0.8));
+            z-index: 9;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-60px); opacity: 0.3; }
+            0% { transform: translateY(20px) scale(0.8); opacity: 0.7; }
+            50% { transform: translateY(-40px) scale(1.2); opacity: 1; }
+            100% { transform: translateY(-80px) scale(1); opacity: 0.4; }
         }
 
         .heart:nth-child(1) { left: 10%; top: 5%; animation-delay: 0s; }
-        .heart:nth-child(2) { right: 10%; top: 15%; animation-delay: 1s; }
-        .heart:nth-child(3) { left: 20%; bottom: 10%; animation-delay: 2s; }
-        .heart:nth-child(4) { right: 20%; bottom: 5%; animation-delay: 3s; }
+        .heart:nth-child(2) { right: 10%; top: 15%; animation-delay: 1.2s; }
+        .heart:nth-child(3) { left: 15%; bottom: 12%; animation-delay: 2.5s; }
+        .heart:nth-child(4) { right: 15%; bottom: 6%; animation-delay: 3.7s; }
 
-        .flower-wrapper {
+        /* PETALS */
+        .petal {
+            position: fixed;
+            top: -10%;
+            width: 22px;
+            height: 22px;
+            background-image: url('https://i.imgur.com/5cM9sQt.png');
+            background-size: cover;
+            opacity: 0.85;
+            animation: fallPetal linear infinite;
+            z-index: 4;
+        }
+
+        @keyframes fallPetal {
+            0% { transform: translateY(-10%) rotate(0deg); }
+            100% { transform: translateY(120vh) rotate(360deg); }
+        }
+
+        /* HEART RING */
+        .heart-ring {
             position: relative;
-            display: inline-block;
-            animation: popIn 1.2s ease;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 15px;
+            animation: rotateRing 16s linear infinite;
+        }
+
+        .heart-ring span {
+            position: absolute;
+            font-size: 1.7rem;
+            color: #ff5f9c;
+            text-shadow: 0 0 10px rgba(255,120,160,0.7);
+        }
+
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* FLOWER IMAGE */
+        .flower-wrapper {
+            animation: popIn 1s ease, glowRoses 3s infinite alternate ease-in-out;
         }
 
         @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        .initial {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+        @keyframes glowRoses {
+            from { filter: drop-shadow(0 0 10px rgba(255,90,140,0.4)); }
+            to { filter: drop-shadow(0 0 25px rgba(255,90,140,1)); }
         }
 
         img {
             width: 100%;
-            max-width: 380px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            max-width: 350px;
+            border-radius: 20px;
         }
 
-        .footer {
-            margin-top: 25px;
-            font-size: 0.9rem;
-            color: #777;
+        /* FLOATING LETTER */
+        .letter {
+            position: fixed;
+            bottom: 10%;
+            left: -250px;
+            font-family: "Cursive", serif;
+            font-size: 1.4rem;
+            color: #6b3b50;
+            opacity: 0.9;
+            animation: floatLetter 14s infinite linear;
+            z-index: 3;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes floatLetter {
+            from { transform: translateX(-250px) rotate(-5deg); }
+            to { transform: translateX(120vw) rotate(5deg); }
+        }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 480px) {
+            .title { font-size: 1.9rem; }
+            .message { font-size: 1rem; }
+            .heart { font-size: 1.3rem; }
+            .heart-ring { width: 170px; height: 170px; }
+            .heart-ring span { font-size: 1.3rem; }
+            img { max-width: 280px; }
+            .letter { font-size: 1.1rem; bottom: 5%; }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- MUSIC -->
+    <audio autoplay loop>
+        <source src="https://cdn.pixabay.com/download/audio/2021/09/06/audio_386d90a6fb.mp3?filename=romantic-piano-118447.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- FLOATING LETTER -->
+    <div class="letter">💌 my heart still chooses you...</div>
+
+    <!-- PETALS -->
+    <script>
+        for (let i = 0; i < 18; i++) {
+            let petal = document.createElement("div");
+            petal.className = "petal";
+            petal.style.left = Math.random() * 100 + "vw";
+            petal.style.animationDuration = 6 + Math.random() * 6 + "s";
+            document.body.appendChild(petal);
+        }
+    </script>
+
     <div class="container">
+
         <!-- Floating hearts -->
         <div class="heart">❤</div>
         <div class="heart">❤</div>
@@ -122,14 +249,20 @@
             You mean the world to me Nzho and i would do anything to get you back by my side again.
             I'm sorry  for any mistakes i've made in the past but lets come back strronger then ever before.
             I know i can do right by you, i did you wrong and i won't forgive myself but i'll try my best to make it up to you.
-            You really do mean the world to me i hope you know that i will try everyday for you and do anything i need to, to make sure your happy.
-            You are part of my heart and soul, and i wanna give you the world but until then take these virtual flowers❤️
+            You mean the world to me i hope you know that i will try everyday for you and do anything i need to, to make sure your happy.
+            You are my part of my heart and soul, and i wanna give you the world but until then take these virtual flowers❤️
+        </div>
+
+        <!-- Heart ring -->
+        <div class="heart-ring">
+            <span style="top:0; left:50%;">❤</span>
+            <span style="top:50%; left:0;">❤</span>
+            <span style="bottom:0; left:50%;">❤</span>
+            <span style="top:50%; right:0;">❤</span>
         </div>
 
         <div class="flower-wrapper">
             <img src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412" alt="Bouquet" />
-
-            <!-- Letter overlay -->
         </div>
 
     </div>
