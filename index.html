@@ -49,6 +49,7 @@
             z-index: 10;
             animation: fadeIn 1.4s ease;
             margin: 20px 0;
+            text-align: center;
         }
 
         @keyframes fadeIn {
@@ -73,12 +74,14 @@
             position: relative;
         }
 
-        img {
+        img#originalImage {
             width: 100%;
             max-width: 350px;
             border-radius: 20px;
             display: block;
             margin: auto;
+            position: relative;
+            z-index: 10;
         }
 
         /* FLOATING HEARTS */
@@ -174,124 +177,137 @@
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            img { max-width: 300px; }
+            img#originalImage { max-width: 300px; }
+        }
+
+        /* NEW: side images floating left and right */
+        #leftPic, #rightPic {
+            position: absolute;
+            width: 180px;
+            border-radius: 20px;
+            top: -90px;
+            box-shadow: 0 12px 40px rgba(255, 100, 150, 0.5);
+            z-index: 15;
+        }
+
+        #leftPic {
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        #rightPic {
+            right: 0;
+            transform: translateX(50%);
+        }
+
+        /* Heart floating above original image, between the side images */
+        #heartBetween {
+            position: absolute;
+            top: -140px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            color: #ff5b92;
+            text-shadow: 0 0 15px rgba(255, 80, 140, 0.7);
+            z-index: 20;
+            pointer-events: none;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- FLOATING HEART SCRIPT -->
-    <script>
-        function createHeartLayer() {
-            let count = 7 + Math.floor(Math.random() * 4); // 7–10 hearts per layer
-
-            for (let i = 0; i < count; i++) {
-                let heart = document.createElement("div");
-                heart.className = "floating-heart";
-                heart.innerHTML = "❤";
-
-                let x = Math.random() * 100;
-                let delay = Math.random() * 2;
-                let size = 24 + Math.random() * 18;
-
-                heart.style.left = x + "vw";
-                heart.style.fontSize = size + "px";
-                heart.style.animationDelay = delay + "s";
-
-                document.body.appendChild(heart);
-
-                setTimeout(() => heart.remove(), 7000);
-            }
+<script>
+    // Floating hearts
+    function createHeartLayer() {
+        let count = 7 + Math.floor(Math.random() * 4);
+        for (let i = 0; i < count; i++) {
+            let heart = document.createElement("div");
+            heart.className = "floating-heart";
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (24 + Math.random() * 18) + "px";
+            heart.style.animationDelay = Math.random() * 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
         }
+    }
+    setInterval(createHeartLayer, 2700);
+    createHeartLayer();
 
-        setInterval(createHeartLayer, 2700);
-        createHeartLayer();
+    // Tiny hearts over text
+    function tinyHeartsOverText() {
+        const textElements = [document.querySelector('.title'), document.querySelector('.message')];
+        textElements.forEach(el => {
+            let heart = document.createElement("div");
+            heart.className = "tiny-heart";
+            heart.innerHTML = "❤";
+            let rect = el.getBoundingClientRect();
+            let x = Math.random() * rect.width;
+            let y = Math.random() * rect.height;
+            heart.style.left = rect.left + x + "px";
+            heart.style.top = rect.top + y + "px";
+            heart.style.animationDelay = Math.random() * 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        });
+    }
+    setInterval(tinyHeartsOverText, 1200);
+</script>
 
-        /* TINY HEARTS ON TEXT */
-        function tinyHeartsOverText() {
-            const textElements = [document.querySelector('.title'), document.querySelector('.message')];
+<div class="container">
 
-            textElements.forEach(el => {
-                let heart = document.createElement("div");
-                heart.className = "tiny-heart";
-                heart.innerHTML = "❤";
+    <div class="title">I love and miss you more then anything</div>
 
-                // Random position over text
-                let rect = el.getBoundingClientRect();
-                let x = Math.random() * rect.width;
-                let y = Math.random() * rect.height;
-
-                heart.style.left = rect.left + x + "px";
-                heart.style.top = rect.top + y + "px";
-
-                // Random animation delay
-                heart.style.animationDelay = Math.random() * 2 + "s";
-
-                document.body.appendChild(heart);
-
-                setTimeout(() => heart.remove(), 5000);
-            });
-        }
-
-        setInterval(tinyHeartsOverText, 1200);
-    </script>
-
-    <div class="container">
-
-        <div class="title">I love and miss you more then anything</div>
-
-        <div class="message">
-            You mean the world to me Nzho and i would do anything to get you back by my side again.
-            I'm sorry  for any mistakes i've made in the past but lets come back strronger then ever before.
-            I know i can do right by you, i did you wrong and i won't forgive myself but i'll try my best to make it up to you.
-            You really do mean the world to me and i hope you know that i will try everyday for you and do anything i need to, to make sure your happy.
-            You are my part of my heart and soul, and i wanna give you the world but until then take these virtual flowers❤️
-        </div>
-
-        <img src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412">
-
-        <button class="reveal-btn" onclick="document.getElementById('secretNote').style.display = 'block';">
-            My extra Love note 💌
-        </button>
-
-        <button class="rose-btn" onclick="dropRoses()">
-            For you🌹
-        </button>
-
-        <div id="secretNote">
-            My heart has never stopped choosing you.<br>
-            No matter what happens, no matter how far life pulls us,<br>
-            a part of me will always belong to you Nzho. ❤️
-        </div>
-
+    <div class="message">
+        You mean the world to me Nzho and i would do anything to get you back by my side again.
+        I'm sorry  for any mistakes i've made in the past but lets come back strronger then ever before.
+        I know i can do right by you, i did you wrong and i won't forgive myself but i'll try my best to make it up to you.
+        You really do mean the world to me and i hope you know that i will try everyday for you and do anything i need to, to make sure your happy.
+        You are my part of my heart and soul, and i wanna give you the world but until then take these virtual flowers❤️
     </div>
 
-    <!-- ROSE DROP SCRIPT -->
-    <script>
-        function dropRoses() {
-            let count = 15 + Math.floor(Math.random() * 10);
+    <!-- Original center image -->
+    <img id="originalImage" src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412" alt="Original Roses Image">
 
-            for (let i = 0; i < count; i++) {
-                let rose = document.createElement("div");
-                rose.className = "rose";
-                rose.innerHTML = "🌹";
+    <!-- Side images and heart (use separate files in root) -->
+    <img id="leftPic" src="leftPic.png" alt="Left Image">
+    <img id="rightPic" src="rightPic.png" alt="Right Image">
+    <div id="heartBetween">❤</div>
 
-                rose.style.left = Math.random() * 100 + "vw";
+    <button class="reveal-btn" onclick="document.getElementById('secretNote').style.display = 'block';">
+        My extra Love note 💌
+    </button>
 
-                let size = 28 + Math.random() * 22;
-                rose.style.fontSize = size + "px";
+    <button class="rose-btn" onclick="dropRoses()">
+        For you🌹
+    </button>
 
-                rose.style.animationDelay = (Math.random() * 1.5) + "s";
+    <div id="secretNote">
+        My heart has never stopped choosing you.<br>
+        No matter what happens, no matter how far life pulls us,<br>
+        a part of me will always belong to you Nzho. ❤️
+    </div>
 
-                rose.style.transform = `translateX(${Math.random() * 40 - 20}px)`;
+</div>
 
-                document.body.appendChild(rose);
-
-                setTimeout(() => rose.remove(), 5000);
-            }
+<script>
+    // Falling roses
+    function dropRoses() {
+        let count = 15 + Math.floor(Math.random() * 10);
+        for (let i = 0; i < count; i++) {
+            let rose = document.createElement("div");
+            rose.className = "rose";
+            rose.innerHTML = "🌹";
+            rose.style.left = Math.random() * 100 + "vw";
+            rose.style.fontSize = (28 + Math.random() * 22) + "px";
+            rose.style.animationDelay = Math.random() * 1.5 + "s";
+            rose.style.transform = `translateX(${Math.random() * 40 - 20}px)`;
+            document.body.appendChild(rose);
+            setTimeout(() => rose.remove(), 5000);
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
