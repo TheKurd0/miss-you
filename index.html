@@ -73,35 +73,40 @@
             position: relative;
         }
 
-        /* ORIGINAL IMAGE (main) */
-        img#originalImage {
+        /* IMAGE WRAPPER */
+        .image-wrapper {
+            position: relative;
             width: 100%;
             max-width: 350px;
+            margin: 50px auto 0;
+        }
+
+        /* MAIN IMAGE */
+        #originalImage {
+            width: 100%;
             border-radius: 20px;
             display: block;
-            margin: 120px auto 0; /* pushed down */
-            position: relative;
             z-index: 10;
         }
 
         /* SIDE IMAGES */
         #leftPic, #rightPic {
             position: absolute;
-            width: 55%; /* slightly bigger */
-            max-width: 200px;
+            width: 55%;
+            max-width: 180px;
+            top: -20%; /* just above main image */
             border-radius: 20px;
-            top: 60px; /* aligned above main image */
             z-index: 12;
             box-shadow: 0 10px 30px rgba(255, 100, 150, 0.5);
         }
 
-        #leftPic { left: 0; } /* fully visible */
-        #rightPic { right: 0; } /* fully visible */
+        #leftPic { left: -15%; } 
+        #rightPic { right: -15%; }
 
         /* HEART BETWEEN SIDE IMAGES */
         #heartBetween {
             position: absolute;
-            top: 45px; /* just above main image, between side images */
+            top: -30%; /* slightly above side images */
             left: 50%;
             transform: translateX(-50%);
             font-size: 50px;
@@ -201,9 +206,9 @@
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            img#originalImage { max-width: 250px; margin-top: 100px; }
-            #leftPic, #rightPic { width: 45%; max-width: 150px; top: 40px; }
-            #heartBetween { font-size: 40px; top: 30px; }
+            .image-wrapper { max-width: 250px; margin-top: 30px; }
+            #leftPic, #rightPic { width: 50%; max-width: 120px; top: -15%; left: -10%; right: -10%; }
+            #heartBetween { font-size: 35px; top: -25%; }
         }
     </style>
 </head>
@@ -250,25 +255,26 @@
 
 <div class="container">
 
-    <div class="title">I love and miss you more then anything</div>
+    <div class="title">I love and miss you more than anything</div>
 
     <div class="message">
-        You mean the world to me Nzho and i would do anything to get you back by my side again.
-        I'm sorry for any mistakes i've made in the past but lets come back strronger then ever before.
-        I know i can do right by you, i did you wrong and i won't forgive myself but i'll try my best to make it up to you.
-        You really do mean the world to me and i hope you know that i will try everyday for you and do anything i need to, to make sure your happy.
-        You are my part of my heart and soul, and i wanna give you the world but until then take these virtual flowers❤️
+        You mean the world to me Nzho and I would do anything to get you back by my side again.
+        I'm sorry for any mistakes I've made in the past but let's come back stronger than ever before.
+        I know I can do right by you, I did you wrong and I won't forgive myself but I'll try my best to make it up to you.
+        You really do mean the world to me and I hope you know that I will try every day for you and do anything I need to, to make sure you're happy.
+        You are part of my heart and soul, and I wanna give you the world but until then take these virtual flowers❤️
     </div>
 
-    <!-- Original center image -->
-    <img id="originalImage" src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412" alt="Original Roses Image">
-
-    <!-- Side images -->
-    <img id="leftPic" src="IMG_4508.png" alt="Left Image">
-    <img id="rightPic" src="IMG_4550.png" alt="Right Image">
-
-    <!-- Heart between side images -->
-    <div id="heartBetween">❤</div>
+    <!-- IMAGE WRAPPER -->
+    <div class="image-wrapper">
+        <!-- Side images -->
+        <img id="leftPic" src="IMG_4508.png" alt="Left Image">
+        <img id="rightPic" src="IMG_4550.png" alt="Right Image">
+        <!-- Heart between side images -->
+        <div id="heartBetween">❤</div>
+        <!-- Original image -->
+        <img id="originalImage" src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412" alt="Original Roses Image">
+    </div>
 
     <button class="reveal-btn" onclick="document.getElementById('secretNote').style.display = 'block';">
         My extra Love note 💌
