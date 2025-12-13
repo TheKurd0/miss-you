@@ -77,7 +77,7 @@
             position: relative;
             width: 100%;
             max-width: 350px;
-            margin: 160px auto 0; /* slightly lower to avoid text overlap */
+            margin: 160px auto 0;
         }
 
         #originalImage {
@@ -90,9 +90,9 @@
         /* SIDE IMAGES */
         #leftPic, #rightPic {
             position: absolute;
-            width: 75%;       /* slightly bigger */
+            width: 75%;
             max-width: 200px;
-            top: -10%;        /* slightly above main image */
+            top: -10%;
             border-radius: 20px;
             z-index: 12;
             box-shadow: 0 10px 30px rgba(255, 100, 150, 0.5);
@@ -198,12 +198,21 @@
             100% { transform: translateY(110vh) rotate(180deg); opacity: 0; }
         }
 
+        /* MOBILE FIXES */
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            .image-wrapper { max-width: 250px; margin-top: 120px; }
-            #leftPic, #rightPic { width: 65%; max-width: 140px; left: -10%; right: -10%; top: -8%; }
-            #heartBetween { font-size: 35px; top: -4%; }
+            .image-wrapper { max-width: 250px; margin-top: 140px; }
+
+            #leftPic, #rightPic { 
+                width: 65%; 
+                max-width: 140px; 
+                top: -5%; /* slightly higher above main image */
+            }
+
+            #leftPic { left: -5%; }
+            #rightPic { right: -5%; } /* FIXED: now visible on mobile */
+            #heartBetween { font-size: 35px; top: -2%; }
         }
     </style>
 </head>
