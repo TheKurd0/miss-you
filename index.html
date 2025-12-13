@@ -78,7 +78,7 @@
             position: relative;
             width: 100%;
             max-width: 350px;
-            margin: 50px auto 0;
+            margin: 140px auto 0; /* slightly lower to avoid text overlap */
         }
 
         /* MAIN IMAGE */
@@ -89,24 +89,24 @@
             z-index: 10;
         }
 
-        /* SIDE IMAGES */
+        /* SIDE IMAGES (bigger now) */
         #leftPic, #rightPic {
             position: absolute;
-            width: 55%;
-            max-width: 180px;
-            top: -20%; /* just above main image */
+            width: 70%;       /* bigger */
+            max-width: 200px; /* bigger */
+            top: 0%;          /* aligned above main image */
             border-radius: 20px;
             z-index: 12;
             box-shadow: 0 10px 30px rgba(255, 100, 150, 0.5);
         }
 
-        #leftPic { left: -15%; } 
-        #rightPic { right: -15%; }
+        #leftPic { left: -18%; }
+        #rightPic { right: -18%; }
 
         /* HEART BETWEEN SIDE IMAGES */
         #heartBetween {
             position: absolute;
-            top: -30%; /* slightly above side images */
+            top: -12%; 
             left: 50%;
             transform: translateX(-50%);
             font-size: 50px;
@@ -202,13 +202,12 @@
             100% { transform: translateY(110vh) rotate(180deg); opacity: 0; }
         }
 
-        /* MOBILE RESPONSIVE */
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            .image-wrapper { max-width: 250px; margin-top: 30px; }
-            #leftPic, #rightPic { width: 50%; max-width: 120px; top: -15%; left: -10%; right: -10%; }
-            #heartBetween { font-size: 35px; top: -25%; }
+            .image-wrapper { max-width: 250px; margin-top: 80px; }
+            #leftPic, #rightPic { width: 60%; max-width: 140px; left: -10%; right: -10%; top: 0%; }
+            #heartBetween { font-size: 35px; top: -8%; }
         }
     </style>
 </head>
@@ -216,7 +215,6 @@
 <body>
 
 <script>
-    // Floating hearts
     function createHeartLayer() {
         let count = 7 + Math.floor(Math.random() * 4);
         for (let i = 0; i < count; i++) {
@@ -233,7 +231,6 @@
     setInterval(createHeartLayer, 2700);
     createHeartLayer();
 
-    // Tiny hearts over text
     function tinyHeartsOverText() {
         const textElements = [document.querySelector('.title'), document.querySelector('.message')];
         textElements.forEach(el => {
@@ -267,12 +264,9 @@
 
     <!-- IMAGE WRAPPER -->
     <div class="image-wrapper">
-        <!-- Side images -->
         <img id="leftPic" src="IMG_4508.png" alt="Left Image">
         <img id="rightPic" src="IMG_4550.png" alt="Right Image">
-        <!-- Heart between side images -->
         <div id="heartBetween">❤</div>
-        <!-- Original image -->
         <img id="originalImage" src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412" alt="Original Roses Image">
     </div>
 
