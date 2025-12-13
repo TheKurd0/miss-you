@@ -20,7 +20,6 @@
             position: relative;
         }
 
-        /* Soft star shimmer background */
         body::before {
             content: "";
             position: fixed;
@@ -84,6 +83,38 @@
             z-index: 10;
         }
 
+        /* SIDE IMAGES */
+        #leftPic, #rightPic {
+            position: absolute;
+            width: 60%;
+            max-width: 200px;
+            border-radius: 20px;
+            top: -50px; /* Slightly above main image */
+            z-index: 12;
+            box-shadow: 0 10px 30px rgba(255, 100, 150, 0.5);
+        }
+
+        #leftPic {
+            left: 5%;
+        }
+
+        #rightPic {
+            right: 5%;
+        }
+
+        /* Heart floating between side images */
+        #heartBetween {
+            position: absolute;
+            top: -80px; /* Above the main image, centered */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            color: #ff5b92;
+            text-shadow: 0 0 15px rgba(255, 80, 140, 0.7);
+            z-index: 20;
+            pointer-events: none;
+        }
+
         /* FLOATING HEARTS */
         .floating-heart {
             position: fixed;
@@ -103,7 +134,6 @@
             100% { transform: translateY(-120vh) scale(1.4); opacity: 0; }
         }
 
-        /* TINY HEARTS OVER TEXT */
         .tiny-heart {
             position: absolute;
             color: #ff8fc3;
@@ -120,7 +150,6 @@
             100% { transform: translateY(-50px) scale(1); opacity: 0; }
         }
 
-        /* BUTTON STYLES */
         .reveal-btn, .rose-btn {
             background: #ff5b92;
             color: white;
@@ -144,7 +173,6 @@
             box-shadow: 0 6px 18px rgba(255, 60, 120, 0.8);
         }
 
-        /* SECRET NOTE */
         #secretNote {
             display: none;
             margin-top: 20px;
@@ -155,7 +183,6 @@
             color: #b31254;
         }
 
-        /* FALLING ROSES */
         .rose {
             position: fixed;
             top: -40px;
@@ -174,43 +201,17 @@
             100% { transform: translateY(110vh) rotate(180deg); opacity: 0; }
         }
 
+        /* MOBILE RESPONSIVE */
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            img#originalImage { max-width: 300px; }
-        }
-
-        /* NEW: side images floating left and right */
-        #leftPic, #rightPic {
-            position: absolute;
-            width: 180px;
-            border-radius: 20px;
-            top: -90px;
-            box-shadow: 0 12px 40px rgba(255, 100, 150, 0.5);
-            z-index: 15;
-        }
-
-        #leftPic {
-            left: 0;
-            transform: translateX(-50%);
-        }
-
-        #rightPic {
-            right: 0;
-            transform: translateX(50%);
-        }
-
-        /* Heart floating above original image, between the side images */
-        #heartBetween {
-            position: absolute;
-            top: -140px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 50px;
-            color: #ff5b92;
-            text-shadow: 0 0 15px rgba(255, 80, 140, 0.7);
-            z-index: 20;
-            pointer-events: none;
+            img#originalImage { max-width: 250px; }
+            #leftPic, #rightPic {
+                width: 40%;
+                max-width: 120px;
+                top: -40px;
+            }
+            #heartBetween { font-size: 35px; top: -60px; }
         }
     </style>
 </head>
@@ -218,7 +219,6 @@
 <body>
 
 <script>
-    // Floating hearts
     function createHeartLayer() {
         let count = 7 + Math.floor(Math.random() * 4);
         for (let i = 0; i < count; i++) {
@@ -235,7 +235,6 @@
     setInterval(createHeartLayer, 2700);
     createHeartLayer();
 
-    // Tiny hearts over text
     function tinyHeartsOverText() {
         const textElements = [document.querySelector('.title'), document.querySelector('.message')];
         textElements.forEach(el => {
@@ -270,9 +269,10 @@
     <!-- Original center image -->
     <img id="originalImage" src="https://noongifts.com/cdn/shop/files/Personalized-Letter-Red-Roses-Bouquet-1.jpg?v=1711753412" alt="Original Roses Image">
 
-    <!-- Side images and heart (your uploaded images) -->
+    <!-- Side images -->
     <img id="leftPic" src="IMG_4508.png" alt="Left Image">
     <img id="rightPic" src="IMG_4550.png" alt="Right Image">
+    <!-- Heart between side images -->
     <div id="heartBetween">❤</div>
 
     <button class="reveal-btn" onclick="document.getElementById('secretNote').style.display = 'block';">
@@ -292,7 +292,6 @@
 </div>
 
 <script>
-    // Falling roses
     function dropRoses() {
         let count = 15 + Math.floor(Math.random() * 10);
         for (let i = 0; i < count; i++) {
