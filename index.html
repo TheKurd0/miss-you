@@ -73,15 +73,13 @@
             position: relative;
         }
 
-        /* IMAGE WRAPPER */
         .image-wrapper {
             position: relative;
             width: 100%;
             max-width: 350px;
-            margin: 140px auto 0; /* slightly lower to avoid text overlap */
+            margin: 160px auto 0; /* slightly lower to avoid text overlap */
         }
 
-        /* MAIN IMAGE */
         #originalImage {
             width: 100%;
             border-radius: 20px;
@@ -89,24 +87,23 @@
             z-index: 10;
         }
 
-        /* SIDE IMAGES (bigger now) */
+        /* SIDE IMAGES */
         #leftPic, #rightPic {
             position: absolute;
-            width: 70%;       /* bigger */
-            max-width: 200px; /* bigger */
-            top: 0%;          /* aligned above main image */
+            width: 75%;       /* slightly bigger */
+            max-width: 200px;
+            top: -10%;        /* slightly above main image */
             border-radius: 20px;
             z-index: 12;
             box-shadow: 0 10px 30px rgba(255, 100, 150, 0.5);
         }
 
         #leftPic { left: -18%; }
-        #rightPic { right: -18%; }
+        #rightPic { right: -18%; display: block; }
 
-        /* HEART BETWEEN SIDE IMAGES */
         #heartBetween {
             position: absolute;
-            top: -12%; 
+            top: -5%; 
             left: 50%;
             transform: translateX(-50%);
             font-size: 50px;
@@ -116,7 +113,6 @@
             pointer-events: none;
         }
 
-        /* FLOATING HEARTS */
         .floating-heart {
             position: fixed;
             bottom: -40px;
@@ -205,9 +201,9 @@
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            .image-wrapper { max-width: 250px; margin-top: 80px; }
-            #leftPic, #rightPic { width: 60%; max-width: 140px; left: -10%; right: -10%; top: 0%; }
-            #heartBetween { font-size: 35px; top: -8%; }
+            .image-wrapper { max-width: 250px; margin-top: 120px; }
+            #leftPic, #rightPic { width: 65%; max-width: 140px; left: -10%; right: -10%; top: -8%; }
+            #heartBetween { font-size: 35px; top: -4%; }
         }
     </style>
 </head>
