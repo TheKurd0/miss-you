@@ -73,12 +73,13 @@
             position: relative;
         }
 
+        /* ORIGINAL IMAGE (main) */
         img#originalImage {
             width: 100%;
             max-width: 350px;
             border-radius: 20px;
             display: block;
-            margin: auto;
+            margin: 80px auto 0; /* push down for side images */
             position: relative;
             z-index: 10;
         }
@@ -86,29 +87,24 @@
         /* SIDE IMAGES */
         #leftPic, #rightPic {
             position: absolute;
-            width: 60%;
-            max-width: 200px;
+            width: 50%; /* smaller than main */
+            max-width: 180px;
             border-radius: 20px;
-            top: -50px; /* Slightly above main image */
+            top: 30px; /* aligned near main image */
             z-index: 12;
             box-shadow: 0 10px 30px rgba(255, 100, 150, 0.5);
         }
 
-        #leftPic {
-            left: 5%;
-        }
+        #leftPic { left: -10%; }
+        #rightPic { right: -10%; }
 
-        #rightPic {
-            right: 5%;
-        }
-
-        /* Heart floating between side images */
+        /* HEART BETWEEN SIDE IMAGES */
         #heartBetween {
             position: absolute;
-            top: -80px; /* Above the main image, centered */
+            top: 20px; /* right above main image */
             left: 50%;
             transform: translateX(-50%);
-            font-size: 50px;
+            font-size: 45px;
             color: #ff5b92;
             text-shadow: 0 0 15px rgba(255, 80, 140, 0.7);
             z-index: 20;
@@ -205,13 +201,9 @@
         @media (max-width: 480px) {
             .title { font-size: 1.9rem; }
             .message { font-size: 1rem; }
-            img#originalImage { max-width: 250px; }
-            #leftPic, #rightPic {
-                width: 40%;
-                max-width: 120px;
-                top: -40px;
-            }
-            #heartBetween { font-size: 35px; top: -60px; }
+            img#originalImage { max-width: 250px; margin-top: 60px; }
+            #leftPic, #rightPic { width: 40%; max-width: 120px; top: 10px; }
+            #heartBetween { font-size: 35px; top: 0; }
         }
     </style>
 </head>
@@ -219,6 +211,7 @@
 <body>
 
 <script>
+    // Floating hearts
     function createHeartLayer() {
         let count = 7 + Math.floor(Math.random() * 4);
         for (let i = 0; i < count; i++) {
@@ -235,6 +228,7 @@
     setInterval(createHeartLayer, 2700);
     createHeartLayer();
 
+    // Tiny hearts over text
     function tinyHeartsOverText() {
         const textElements = [document.querySelector('.title'), document.querySelector('.message')];
         textElements.forEach(el => {
@@ -272,6 +266,7 @@
     <!-- Side images -->
     <img id="leftPic" src="IMG_4508.png" alt="Left Image">
     <img id="rightPic" src="IMG_4550.png" alt="Right Image">
+
     <!-- Heart between side images -->
     <div id="heartBetween">❤</div>
 
